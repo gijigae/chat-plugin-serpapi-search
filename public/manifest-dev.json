@@ -2,41 +2,49 @@
   "$schema": "../node_modules/@lobehub/chat-plugin-sdk/schema.json",
   "api": [
     {
-      "url": "http://localhost:3400/api/clothes",
-      "name": "recommendClothes",
-      "description": "根据用户的心情，给用户推荐他有的衣服",
+      "name": "query",
+      "url": "http://localhost:3400/api/index",
+      "description": "Query search engines for information",
       "parameters": {
         "properties": {
-          "mood": {
-            "description": "用户当前的心情，可选值有：开心（happy）, 难过（sad）,生气 （anger）,害怕（fear）,惊喜（ surprise）,厌恶 （disgust）",
-            "enum": ["happy", "sad", "anger", "fear", "surprise", "disgust"],
+          "query": {
+            "description": "Search text content",
             "type": "string"
-          },
-          "gender": {
-            "type": "string",
-            "enum": ["man", "woman"],
-            "description": "对话用户的性别，需要询问用户后才知道这个信息"
           }
         },
-        "required": ["mood", "gender"],
+        "required": ["query"],
         "type": "object"
       }
     }
   ],
-  "author": "LobeHub",
+  "author": "Choimirai School",
   "createdAt": "2023-09-03",
   "gateway": "http://localhost:3400/api/gateway",
   "homepage": "https://github.com/lobehub/chat-plugin-template",
-  "identifier": "plugin-identifier",
+  "identifier": "searchEngine-dev",
   "meta": {
     "avatar": "🚀",
     "tags": ["template"],
-    "title": "Chat Plugin Template",
+    "title": "Web Search",
     "description": "This is the plugin template for LobeChat plugin development"
+  },
+  "settings": {
+    "type": "object",
+    "required": ["SERPAPI_API_KEY"],
+    "properties": {
+      "SERPAPI_API_KEY": {
+        "title": "SerpAPI API Key",
+        "description": "we use [SerpAPI](https://serpapi.com) as backend service | 该插件使用 SerpAPI 作为搜索服务",
+        "type": "string",
+        "minLength": 64,
+        "maxLength": 64,
+        "format": "password"
+      }
+    }
   },
   "ui": {
     "url": "http://localhost:3400",
-    "height": 200
+    "mode": "module"
   },
   "version": "1"
 }
